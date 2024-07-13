@@ -1,5 +1,5 @@
 
-
+import { Link } from "react-router-dom"
 
 const Header = () => {
     return (
@@ -12,10 +12,11 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">Tasks</a>
+                {/* <a className="nav-link" aria-current="page" href="/">Tasks</a> */}
+                <Link className="nav-link" aria-current="page" to="/">Tasks</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/addTask">Add Task</a>
+                <Link className="nav-link" to="/addTask">Add Task</Link>
               </li>
             </ul>
           </div>

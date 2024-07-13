@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    value: 3456,
-    abc: 6789,
-    task: ['First Task', 'Second Task']
+    taskObjects: [
+      {
+        id: 1,
+        taskDescription: 'This is the first task',
+        status: false
+      }
+  ]
 }
 
 
@@ -11,24 +15,25 @@ export const taskSlice = createSlice({
     name: 'taskSlice',
     initialState,
     reducers: {
-        increment: (state) => {
-          state.value += 1
+        addTaskObject: (state, action) => {
+          state.taskObjects.push({
+            id: state.taskObjects.length + 1,
+            taskDescription: action.payload,
+            status: false
+          });
         },
-        decrement: (state) => {
-          state.value -= 1;
-        },
-        incrementByData: (state, action) =>{
-          state.value += action.payload
-        },
-        addTask: (state, action) => {
-          state.task.push(action.payload);
-        },
-        deleteTask: (state, action) => {
-            state.task.splice(action.payload, 1);
+        changeTaskObject: (state, action) => {
+          state.taskObjects.map(task => {
+            if (task.id === action.payload) {
+              task.status = !task.status
+            }
+            return task;
+          })
         }
+
     }
 });
 
-export const { increment, decrement, incrementByData, addTask, deleteTask } = taskSlice.actions;
+export const { addTaskObject, changeTaskObject } = taskSlice.actions;
 
 export default taskSlice.reducer;
